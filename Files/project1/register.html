@@ -1,0 +1,162 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="این یک سایت آزمایشی برای تمرین طراحی رابط کاربری سایت ها است" />
+		<meta name="author" content="علی قاسم پور" />
+		<link href="../../Css/project1/project1.css" type="text/css" rel="stylesheet" />
+		<link href="../../jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+		<script src="../../jquery/jquery.min.js"></script>
+		<script src="../../jquery-ui/jquery-ui.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq1THRZ" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function(){
+				var emails = JSON.parse(localStorage.getItem('usersEmail')) || [];
+				$('#visiblePass').click(function(){
+					if($(this).is(':checked')){
+						$('#password').attr('type', 'text');
+						$('#password-confirm').attr('type', 'text');
+					}
+					else
+					{	
+						$('#password').attr('type', 'password');
+						$('#password-confirm').attr('type', 'password');
+					}
+				});
+				
+				if(!localStorage.getItem('usersEmail') == null){
+					for(let email of JSON.parse(localStorage.getItem('usersEmail'))){
+						if($('#emailAdd').val() == JSON.parse(localStorage.getItem('usersEmail')[email])){
+							event.preventDefault();
+							$('#alert2').css('display','block');
+						} 
+					
+					}
+				}
+				
+				$('button[type=submit]').click(function(event){
+					var namePatt = /^[a-zA-Z]+\d*/
+					var lNamePatt = /^[a-zA-Z]+\d*/
+					var emailPatt = /[a-zA-Z]*@(yahoo|gmail).com/
+					
+					for(var email of JSON.parse(localStorage.getItem('usersEmail'))){
+						if($('#emailAdd').val() == JSON.parse(localStorage.getItem('usersEmail'))[email]){
+							event.preventDefault();
+							$('#alert2').css('display','block');
+						}
+						
+					}
+					
+					if($('#password').val() != $('#password-confirm').val()){
+						event.preventDefault();
+						$('#alert1').css('display', 'block');
+					}
+					
+					else if(!emailPatt.test($('#emailAdd').val()))
+					{
+						event.preventDefault();
+						$('#alert2').css('display','block');
+					}
+					
+					
+					else if(!$('input[name=rdbGender]').is(':checked'))
+					{
+						event.preventDefault();
+						$('#alert3').css('display','block')
+					}
+					
+					else if(!namePatt.test($('#txtFname').val()))
+					{
+						event.preventDefault();
+						$('#alert4').css('display','block')
+						
+					}
+					
+					else if(!lNamePatt.test($('#txtLname').val()))
+					{
+						event.preventDefault();
+						$('#alert5').css('display','block')
+						
+					}
+					
+					else{
+						event.preventDefault();
+						let userInfo = {
+							userNumber: parseInt(localStorage.getItem('usersNumber')) + 1,
+							userName : $('#txtFname').val(),
+							userLastName : $('#txtLname').val(),
+							userEmail : $('#emailAdd').val(),
+							userPass : $('#password').val(),
+							userGender : $('input[type=radio]:checked').val(),
+						};
+						emails.push($('#emailAdd').val())
+						localStorage.setItem('user'+ parseInt(localStorage.getItem('usersNumber')) ,userInfo);
+						localStorage.setItem('usersNumber', parseInt(localStorage.getItem('usersNumber'))+1);
+						localStorage.setItem('usersEmail', JSON.stringify(emails) );
+					}
+					
+					
+					
+				})
+				
+				$('button.close').click(function(){
+					$(this).parent().fadeOut(1000)
+				});
+				
+			})
+		</script>
+	</head>
+	<body class="container register">
+				<div class="row">
+					<ul class="breadcrumb bg-light">
+						<li class="breadcrumb-item"><a href="../../project1.html" >صفحه اصلی</a></li>
+						<li class="breadcrumb-item"></li>
+						<li class="breadcrumb-item"  ><a > ثبت نام</a></li>
+						
+					</ul>
+				</div>
+				<div class="row d-flex flex-row justify-content-center">
+					<div class="col-8 card loginCard my-5">
+						<div class="card-body">
+							<form action="reg.php" method="post" class="formValidate">
+								<div class="form-group my-2">
+									<label for="txtFname">نام:</label>
+									<input type="text" id="txtFname" name="txtFname" class="form-control w-25" required /><div class="alert alert-warning alert-dismissible px-1 py-2" id="alert4" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> نام باید با حرف شروع شده و میتواند تنها عدد داشته باشد!</div>
+								</div>
+								<div class="form-group my-2">	
+									<label for="txtLname">نام خانوادگی:</label>
+									<input type="text" id="txtLname" name="txtLname" class="form-control w-25" required /><div class="alert alert-warning alert-dismissible px-1 py-2" id="alert5" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> نام خانوادگی باید با حرف شروع شود و میتواند تنها عدد داشته باشد!</div>
+								</div>
+								<div class="form-group my-2">	
+									<label for="email">آدرس ایمیل</label>
+									<input type="email" id="emailAdd" name="emailAdd"  class="form-control w-75" /><div class="alert alert-warning alert-dismissible px-1 py-2" id="alert2" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> ایمیل شما صحیح نیست!</div>
+								</div>
+								<div class="form-group my-2">	
+									<label for="password" style="display:block;">رمز عبور:</label>
+									<input type="password" id="password" name="password" class="form-control w-50" required style="display:inline;" />
+									<label style="display:inline;" id="visiblePassL" for="visiblePass" class="form-check-label">
+										<input type="checkbox" id="visiblePass"  class="form-check-input mt-2 ml-2" /> آشکار سازی رمز
+									</label>
+								</div>
+								<div class="form-group my-2">	
+									<label for="password" style="display:block;">تکرار رمز عبور:</label>
+									<input type="password" id="password-confirm" style="display:inline;" name="password-confirm"  class="form-control w-50" required /><div class="alert alert-warning alert-dismissible px-1 py-2" id="alert1" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> رمز عبور با تکرار رمز عبور یکسان نیست!</div>
+
+								</div>
+								<div class="radio-inline">
+									<label for="genderMale"><input type="radio" value="M" name="rdbGender" /> مرد</label>
+									<label for="genderFemale"><input type="radio" value="F" name="rdbGender"  /> زن</label>
+								</div>
+								<div class="alert alert-warning alert-dismissible px-1 py-2" id="alert3" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> جنسیت خود را مشخص کنید!</div>
+								<div class="d-flex justify-content-between">
+									<button type="submit" formnovalidate  class="btn btn-primary my-2" title="register" >ثبت نام</button>
+									<span>آیا حساب کاربری دارید؟ <a href="login.html" title="login" > ورود </a></span>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+	</body>
+</html>
