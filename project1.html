@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="این یک سایت آزمایشی برای تمرین طراحی رابط کاربری سایت ها است" />
+		<meta name="author" content="علی قاسم پور" />
+		<link href="Css/project1/project1.css" type="text/css" rel="stylesheet" />
+		<link href="jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+		<script src="jquery/jquery.min.js"></script>
+		<script src="jquery-ui/jquery-ui.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		
+		<script>
+			$(document).ready(function(){
+				
+				
+				$('.hm').closest('button').hover(function(){
+					$('.hm').attr('src', 'images/icons/humburgericon.gif')
+				},function(){
+					$('.hm').attr('src', 'images/icons/humburgericon.png')
+				})
+				
+				
+				$('#heart').click(function(){
+					if($('#heart').is(':checked'))
+					{
+						$(this).siblings('img').css('background-color','red')
+						$(this).siblings('span').text(eval($(this).siblings('span').text()) + 1)
+					}
+					
+					else
+					{
+						$(this).siblings('img').css('background-color','white')
+						$(this).siblings('span').text(eval($(this).siblings('span').text()) + -1)
+					}
+				})
+				
+				$('#visiblePass').click(function(){
+					if($(this).is(':checked'))
+					{
+						$('#password').attr('type', 'text');
+					}
+					else
+					{
+						$('#password').attr('type', 'password');
+					}
+				})
+				
+				$('#downloadLink').click(function(e){
+					e.preventDefault();
+					window.location.href= "";
+				})
+				
+				$('.cmToggle').click(function(e){
+					e.preventDefault()
+					if($('.comments').hasClass('d-none'))
+						$('.comments').removeClass('d-none')
+					else	
+						$('.comments').addClass('d-none')
+				})
+			})
+		</script>
+	</header>
+	<body>
+		<div class="container-fluid mainpage">
+			<div class="modal dismissable" id="empModal">
+				<div class="modal-dialog">
+					<div class="modal-content" >
+						<div class="modal-header d-flex justify-content-between">
+							<button class="btn-close close-modal" data-bs-dismiss="modal" type="button"></button> 
+							<h6>ورود</h6>
+						</div>
+						<div class="modal-body">
+							<form action="login.php" class="d-flex flex-column" id="loginMPForm" method="post">
+								<div class="form-group my-2">
+									<label for="email" >ایمیل خود را وارد کنید: </label>
+									<input type="email" id="emailAdd" name="loginEmail" class="form-control w-75" />
+								</div>
+								
+								<div class="form-group my-2">
+									<label for="password" style="display:block">رمز خود را وارد کنید:  </label>
+									<input type="password" id="password" name="loginPass" class="form-control w-50" style="display:inline"  />
+									<label class="form-check-label" id="visiblePassL" for="visiblePass" >
+										<input type="checkbox" class="form-check-input mt-1" id="visiblePass" /> آشکار سازی رمز
+									</label>
+								</div>
+								<div class="g-recaptcha brochure__form__captcha" data-sitekey="" ></div>
+								
+							</form>
+						</div>
+						<div class="modal-footer">
+							<input type="submit" value="ورود" class='btn btn-primary align-self-end' form="loginMPForm" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="d-felx justify-content-between navbar navbar-expand-sm navbar-light fixed-top bg-light" >
+				<ul class="nav">
+					<li class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">منو</a>
+						<div class="dropdown-menu">
+							<a href="files/project1/register.html" class="dropdown-item">ثبت نام</a>
+							<a href="#" class="loginMT dropdown-item">ورود</a>
+						</div>
+					</li>
+					<li class="nav-item"><a href="files/project1/register.html" class="nav-link btn btn-primary">ثبت نام</a></li>
+					<li class="nav-item"><a  id="" data-bs-toggle="modal" data-bs-target="#empModal" class="loginMT nav-link">ورود</a></li>
+				</ul>
+				<div class="d-flex flex-row">
+					<input type="text" class="form-control" placeholder="جست و جو..." id="inpSearch" />
+					<button type="submit" id="btnSiteSearch"><img src="images/icons/searchicon.png" class="img-fluid rounded-circle" /></button>
+					<a href="files/project1/mainPage.html" class="navbar-brand btn" title="safechat page"><img src="images/logo/sclogo.png" alt="safechat log" class="img-fluid" /></a>
+				</div>
+			</nav>
+		</div>
+		
+		<div class="container-fluid" id="main-page">
+			<div class="row " >
+				<div class="col-sm-4 mb-2" >
+					<div class="sticky">
+					<div class="card my-3" >
+						<div class="card-header bg-dark"><br /></div>
+						<div class="card-body d-flex justify-content-center">
+							<div class="cardbodymain">
+								<h6 class='card-title'>ایران خودرو<h6><img src="images/logo/ikco_logo.png" alt="ikcologo" class="img-fluid rounded-circle img-thumbnail addCardImg"  />
+								<p class="card-text">
+									شروع فروش فوق العاده محصولات ایران خودرو<br />
+									فقط دو روز دیگر فرصت باقی است.
+								</p>
+								<a href="http://esale.ikco.ir"  class="btn btn-primary w-100">ثبت نام</a>
+							</div>
+						</div>
+					</div>
+					<div class="card my-3 ">
+						<div class="card-header" ><br /></div>
+						<div class="card-body d-felx justify-content-center ">
+							<div class="cardbodymain">
+								<h6 class="card-title">بانک ملت</h6><img src="images/logo/bankmellatlogo.png" class="img-fluid img-thumbnail rounded-circle addCardImg" />
+								<p class="card-text">
+									با ایجاد حساب در بانک ملت در قرعه کشی یک دستگاه ماشین
+									شرکت کن و برنده شو. همین الان به صورت آنلاین حساب خود را
+									ایجاد کن.
+								</p>
+								<a href="http://bankmellat.ir" class="btn btn-primary w-100">باز کردن حساب</a>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-6 bg-light mb-0  my-3 " style="padding:0">
+					<article>
+						<div>
+							<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--_I5PjNWW--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/f01bzcb1lbou6x2p9tow.png" class="img-fluid w-100" >
+						</div>
+						<div class="articleProfile container mt-2" style="text:right;">
+							<a href="#" title="profile"><img src="images/icons/adminicon.png" class="profileIm img-fluid img-thumbnail rounded-circle" />مدیر سایت:</a><br/>
+							<span class="text-muted dates">پست شده در 1400/8/18</span>
+						</div>
+						<div class="articleBody container mt-2 pb-3" style="line-height:1.5">
+							سی اس اس مخفف جمله Cascading Style Sheets می باشد که در کنار زبان نشانه گذاری html هسته اصای ساخت صفحات وب می باشد. در واقع سی اس اس روشی برای نمایش چیدمان و ظاهر صفحات وب می باشد. به عنوان مثال شما پس از مشخص کردن مکانی در صفحه وب توسط اچ تی ام ال می توانید با کدهای ساده در سی اس اس نوع قلم ، اندازه ، رنگ، تصویر و در کل ظاهر آن مکان را تعیین کنید.سی اس اس
+							در استاندارد w3c بسیار مهم است که تمامی ویژگی های یک صفحه وب در سی اس اس نوشته شود و در مابین کدهای سایت خبری از این دستورات نباشد. در واقع نظم و پاکیزگی در کدهای قالب سایت بسیار حائز اهمیت می باشد. شایان ذکر می باشد که در نسخه های قدیمی html طراحان وب از جدول برای معین کردن چیدمان سایت استفاده می کردند که در استاندارد های جدید با معرفی دستور  DIV جداول به صورت کامل حذف شدند. به دلیل ساده تر بودن کار با DIV برای چیدمان صفحه، طراحان سایت از جداول تنها برای نمایش داده های ستونی استفاده می کنند.
+							یک نکته بسیار جالب توجه در مورد سی اس اس این می باشد که سی اس اس در حافظه پنهان مرور گر یا همان کش ذخیره می شود و برای استفاده از آن در چندین صفحه نیازی به باز خوانی آن نمی باشد.
+
+							انواع سی اس اس
+							برای نوشتن سی اس اس سه روش موجود است که به شرح زیر می باشد:<br />                                                     
+							 
+
+							<br />1-    سی اس اس درون خطی (inline)
+										در این روش ویژگی ها و مشخصات، در تگ مربوطه در همان صفحه اچ تی ام ال نوشته می شود:<br /> 
+<xmp>
+<span style=”text-align:center;margin:0 auto”></span>
+</xmp>
+
+							<br />2-    سی اس اس داخلی (internal)
+							   
+
+							 در این روش ویژگی ها در قسمت head سایت با نوشتن تگ style مشخص می شود:<br /> 
+<xmp>
+<head>
+
+<"style type="txt/css>
+
+Span { text-align:center; margin:0 auto;}
+
+</style>
+
+</head>
+</xmp>
+							 
+
+
+							<br />3-    سی اس اس خارجی (external) 
+							که بهترین روش نوشتن سی اس اس نیز می باشد. در این روش یک صفحه با پسوند .css ساخته می شود و از صفحه html در قسمت head  لینکی برای آن ارسال می شود و این دو صفحه را به هم مرتبط می کند:<br /> 
+
+						 
+<xmp >
+<head>
+
+</"link rel=”stylesheet” type=”text/css” href=”style.css>
+
+</head>
+</xmp>
+							
+
+							 
+
+							 
+
+							نکته قابل ذکر این می باشد که به دلیل تفاوت در ساختار مرورگرها، برخی از دستورات در مرورگرها نمایش داده نمی شوند و یا به صورت متفاوت نمایش داده می شوند. به یاد داشته باشید که از دستورات منسوخ شده توسط استاندارد w3c در قالب سایت خود استفاده نکنید.
+						</div>
+					</article>
+					<div class='comments d-none'>
+						<div class="commentForm px-2 py-3">	
+							<div class="form-group my-2">
+								<label for="cmTxtFname" class="form-label" >نام: </label>
+								<input type="text" class="form-control w-25" />
+							</div>
+							<div class="form-group">
+								<label for="email" class="form-label" >ایمیل: </label>
+								<input type="email" class="form-control w-75" placeholder="example@gmail/yahoo.com"/>
+							</div>
+							<div class="form-group">
+								<label for="commentTxt" class="form-label" >دیدگاه شما:  </label>
+								<textarea id="commentTxt"  class="form-control w-100">
+								</textarea>
+							</div>
+							<div class="alert alert-warning ">برای ثبت نظر ابتدا <a href="files/project1/login.html" > وارد </a>شوید! </div>
+						</div>
+						<div class="comment">
+							<img src="images/icons/adminicon.png" class=' img-fluid img-thumbnail rounded-circle profileIm position-absolute'  />
+							<div class="comments card my-3 w-75 mx-auto" >
+								
+								<div  class="card-header">
+									مدیر سایت: 
+								</div>
+								<div class="card-body">
+									<p class="card-text">دیدگاه های خود را برای ما ارسال کنید.<br />
+									با تشکر.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-evenly mt-3 border-top" id="postsMenuRow">
+						<div class="cardbodymain" >
+						<button type="button" class="btn btn-outline mx-2">
+							<div class="d-flex flex-column cardbodymain ">
+								<img src="images/icons/likeicon.png" title="Like" class="sideBarPics img-fluid  rounded-circle" />
+								<span id="likes">
+									2
+								</span>
+							</div>
+						</button>
+						
+						
+						<button type="button" class=" btn btn-outline mx-2">
+							<div class="d-flex flex-column cardbodymain ">
+								<img src="images/icons/followicon.png" title="follow" class="sideBarPics img-fluid rounded-circle" />
+								<span id="likes">
+									10
+								</span>
+							</div>
+						</button>
+						
+						<a id="downloadLink" class=" btn btn-outline mx-2" download >
+															
+								<div class="d-flex flex-column cardbodymain ">
+									<img src="images/icons/saveicon.png" title="save" class="sideBarPics img-fluid rounded-circle" />
+								</div>
+						</a>
+						
+						<div class="btn-group dropdown">
+							<button  type="button" class="dropdown-toggle btn  my-3" data-bs-toggle="dropdown">
+								<div class="d-flex flex-column cardbodymain ">
+									<img src="images/icons/humburgericon.png" title="more" class="sideBarPics img-fluid hm rounded-circle" />
+								</div>
+							</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item cmToggle" href="#" >نظرات</a></li>
+								<a class="dropdown-item" href="#">اشتراک گذاری</a></li>
+								<a class="dropdown-item" href="#">گزارش</a></li>
+							</div>
+						</div>
+						
+					</div>
+					</div>
+				</div>
+				<div  class="col-sm-2 justify-content-center" >
+					<div class="cardbodymain sticky" id="postsMenuCol" >
+						<button type="button" class="btn btn-outline my-2 ">
+							<label for="heart" class="d-flex flex-column cardbodymain ">
+								<img src="images/icons/likeicon.png" title="Like" class="sideBarPics img-fluid  rounded-circle align-self-center" />
+								<span id="likes">
+									2
+								</span>
+								<input id="heart" type="checkbox" style="display:none;" >
+							</label>
+						</button><br />
+						
+						
+						<button type="button" class=" btn btn-outline my-3">
+							<div class="d-flex flex-column cardbodymain ">
+								<img src="images/icons/followicon.png" title="follow" class="sideBarPics img-fluid rounded-circle" />
+								<span id="likes">
+									10
+								</span>
+							</div>
+						</button><br />
+						
+			
+						<button type="button" class=" btn btn-outline my-3">
+							<div class="d-flex flex-column cardbodymain ">
+								<img src="images/icons/saveicon.png" title="save" class="sideBarPics img-fluid rounded-circle" />
+							</div>
+						</button><br />
+						<div class="btn-group dropend">
+							<button  type="button" class="dropdown-toggle btn  my-3" data-bs-toggle="dropdown">
+								<div class="d-flex flex-column cardbodymain ">
+									<img src="images/icons/humburgericon.png" title="more" class="sideBarPics img-fluid hm rounded-circle" />
+								</div>
+							</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item cmToggle" >نظرات</a></li>
+								<a class="dropdown-item" href="#">اشتراک گذاری</a></li>
+								<a class="dropdown-item" href="#">گزارش</a></li>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="container-fluid">
+			<div class="row bg-light justify-content-evenly mt-0">
+				
+				<div class="col-5 my-3 py-4">
+					<p>
+						با ما در تماس باشید:<br />
+						تلفن: 86175921-021<br />
+						ادرس: خیابان شریعتی-کوچه شقایق-پلاک 32<br />
+					
+					</p>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1618.9745789738595!2d51.44644068731978!3d35.752054382702404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e040be7e2a38d%3A0xb5bc992beec9ec7!2sTehran%20Province%2C%20Tehran%2C%20Davood%20Golnabi%20St%2C%207%2C%20Iran!5e0!3m2!1sen!2s!4v1636801138958!5m2!1sen!2s"    allowfullscreen="" loading="lazy"></iframe>
+					
+				</div>
+				<div class="col-5 my-3 py-4">
+					<ul class="list-unstyled">
+						<li>لینک های مهم:</li>
+						<li><a href="#">برنامه نویسی</a></li>
+						<li><a href="#">فرانت اند</a></li>
+						<li><a href="#">بک اند</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
