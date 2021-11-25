@@ -12,7 +12,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq1THRZ" crossorigin="anonymous"></script>
 		<script>
 			$(document).ready(function(){
-				alert(JSON.parse(localStorage.getItem('user0')))
 				var emails = JSON.parse(localStorage.getItem('usersEmail')) || [];
 				
 				$('#visiblePass').click(function(){
@@ -95,10 +94,11 @@
 								userGender : $('input[type=radio]:checked').val(),
 							};
 							emails.push($('#emailAdd').val())
-							localStorage.setItem('user'+ parseInt(localStorage.getItem('usersNumber')) ,userInfo);
+							localStorage.setItem('user'+ parseInt(localStorage.getItem('usersNumber')) ,JSON.stringify(userInfo));
 							localStorage.setItem('usersNumber', parseInt(localStorage.getItem('usersNumber'))+1);
 							localStorage.setItem('usersEmail', JSON.stringify(emails) );
-					
+							$('#alertS').css('display','block')
+							
 						}
 						
 					}
@@ -117,6 +117,11 @@
 					$(this).parent().fadeOut(1000)
 				});
 				
+				
+				
+				$('.loginAlert').click(function(){
+					window.open('login.html')
+				})
 			})
 		</script>
 	</head>
@@ -143,7 +148,7 @@
 								</div>
 								<div class="form-group my-2">	
 									<label for="email">آدرس ایمیل</label>
-									<input type="email" id="emailAdd" name="emailAdd"  class="form-control w-75" /><div class="alert alert-warning alert-dismissible px-1 py-2" id="alert2" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> ایمیل شما صحیح نیست!</div>
+									<input type="email" id="emailAdd" name="emailAdd"  class="form-control w-75" /><div class="alert alert-warning alert-dismissible px-1 py-2" id="alert2" style="display:none;font-size:12px;" ><button type="button" class="close" >&times;</button> ایمیل شما صحیح نیست یا قبلا استفاده شده!</div>
 								</div>
 								<div class="form-group my-2">	
 									<label for="password" style="display:block;">رمز عبور:</label>
@@ -169,6 +174,8 @@
 							</form>
 						</div>
 					</div>
+					<div class="alert alert-dismissible py-2 px-2 alert-info" id="alertS" style="display:none;" ><button  class="btn-close close"  ></button><span  class="mx-5 my-2"> ثبت نام با موفقیت انجام شد برای ادامه روی ورود کلیک کنید</span> <button class="btn btn-secondary color-white loginAlert" >ورود</button></div>
+
 				</div>
 				
 	</body>
