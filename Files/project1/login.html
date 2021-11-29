@@ -5,14 +5,14 @@
 		<meta name="description" content="این یک سایت آزمایشی برای تمرین طراحی رابط کاربری سایت ها است" />
 		<meta name="author" content="علی قاسم پور" />
 		<link href="../../Css/project1/project1.css" type="text/css" rel="stylesheet" />
+		<script src="../../jquery/jquery.min.js"></script>
 		<link href="../../jquery-ui/jquery-ui.min.css" type="text/css" rel="stylesheet" />
 		<script src="../../jquery-ui/jquery-ui.min.js"></script>
-		<script src="../../jquery/jquery.min.js"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq1THRZ" crossorigin="anonymous"></script>
-		<script src="https://www.google.com/recaptcha/api.js"></script>
 		<script>
 			$(document).ready(function(){
+				var fs = require('fs');
 				var emails = JSON.parse(localStorage.getItem('usersEmail'));
 				var emailPatt = /[a-zA-Z]*@(yahoo|gmail).com/
 				$('input[type=submit]').click(function(){
@@ -27,7 +27,9 @@
 						$('#alert2').css('display','block');
 					}
 					else{
-						open('mainPageuser'+parseInt(emails.indexOf($('#emailAdd').val()))+'.html')
+						fs.open('mainPageuser'+parseInt(emails.indexOf($('#emailAdd').val()))+'.html',function(error, file){
+							if (error) throw error;
+						})
 					}
 				})
 				
